@@ -28,6 +28,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentDetail> getCommentListByShopId(Long shopId, String queryType, Integer pageNum,Integer pageSize) {
+        //评论限制只能取前三页，每页10条，故 pageNum*pageSize必须 小于等于 30
+        if (pageNum * pageSize > 30){
+            pageNum = 3;
+            pageSize = 10;
+        }
         int offset = (pageNum-1)*pageSize;
         CommentDetailExample commentDetailExample = new CommentDetailExample();
         commentDetailExample.setOffset(offset);
@@ -77,6 +82,11 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     public List<CommentDetail> getCompanyCommentByCompanyId(Long companyId, String queryType, Integer pageNum, Integer pageSize) {
+        //评论限制只能取前三页，每页10条，故 pageNum*pageSize必须 小于等于 30
+        if (pageNum * pageSize > 30){
+            pageNum = 3;
+            pageSize = 10;
+        }
         CompanyShopExample companyShopExample = new CompanyShopExample();
         companyShopExample.createCriteria().andCompanyIdEqualTo(companyId);
         List<CompanyShop> companyShopList = companyShopMapper.selectByExample(companyShopExample);
@@ -156,6 +166,11 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     public List<CommentDetail> getHighQualityComment(Integer shopId, Integer companyId, Integer pageNum, Integer pageSize) {
+        //评论限制只能取前三页，每页10条，故 pageNum*pageSize必须 小于等于 30
+        if (pageNum * pageSize > 30){
+            pageNum = 3;
+            pageSize = 10;
+        }
         int offset = (pageNum-1)*pageSize;
         CommentDetailExample commentDetailExample = new CommentDetailExample();
         commentDetailExample.setOffset(offset);

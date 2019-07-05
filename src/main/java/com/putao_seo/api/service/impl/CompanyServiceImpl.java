@@ -53,7 +53,11 @@ public class CompanyServiceImpl implements CompanyService {
      */
     @Override
     public List<CompanyBrief> getCompanyBriefListByRegionPath(String regionPath, boolean includeChild, Integer pageNum, Integer pageSize) {
-
+        //公司限制只能取前10页，每页10条，故 pageNum*pageSize必须 小于等于 100
+        if (pageNum * pageSize > 100){
+            pageNum = 10;
+            pageSize = 10;
+        }
         int offset = (pageNum - 1)*pageSize;
 
         CompanyDetailExample companyDetailExample = new CompanyDetailExample();

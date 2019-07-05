@@ -32,7 +32,11 @@ public class CompanyShopServiceImpl implements CompanyShopService {
      */
     @Override
     public List<ShopBrief> getShopBriefListByCompanyId(Long companyId, Integer pageNum, Integer pageSize) {
-
+        //店铺限制只能取前10页，每页10条，故 pageNum*pageSize必须 小于等于 100
+        if (pageNum * pageSize > 100){
+            pageNum = 10;
+            pageSize = 10;
+        }
         CompanyShop companyShop = new CompanyShop();
         companyShop.setCompanyId(companyId);
         int offset = (pageNum - 1)* pageSize;

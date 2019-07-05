@@ -119,12 +119,11 @@ public class ShopController {
                                                           @RequestParam(name = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
         Map<String, Object> map = new HashMap<String, Object>();
         try {
-
-            List<ShopDetail> shopDetailList = shopService.getShopListByRegion(regionPath, pageNum, pageSize);
-            long count = shopService.countShopListbyRegion(regionPath);
-            map.put("list", shopDetailList);
-            map.put("count", count);
-            return BaseBizResult.success(map);
+                List<ShopDetail> shopDetailList = shopService.getShopListByRegion(regionPath, pageNum, pageSize);
+                long count = shopService.countShopListbyRegion(regionPath);
+                map.put("list", shopDetailList);
+                map.put("count", count);
+                return BaseBizResult.success(map);
         } catch (Exception e) {
             e.printStackTrace();
             return BaseBizResult.error(e.getMessage());

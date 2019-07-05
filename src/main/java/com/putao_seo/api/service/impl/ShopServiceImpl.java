@@ -52,7 +52,11 @@ public class ShopServiceImpl implements ShopService {
      */
     @Override
     public List<ShopDetail> getShopListByRegion(String regionPath, Integer pageNum, Integer pageSize) {
-
+        //店铺限制只能取前10页，每页10条，故 pageNum*pageSize必须 小于等于 100
+        if (pageNum * pageSize > 100){
+            pageNum = 10;
+            pageSize = 10;
+        }
 //        SeoRegion seoReigon = seoRegionMapper.selectByPrimaryKey(regionCode);
 //
 //        if (seoReigon != null){
@@ -112,6 +116,11 @@ public class ShopServiceImpl implements ShopService {
      */
     @Override
     public List<ShopBrief> getShopBriefListByExample(String regionPath, Integer commentCount, Integer pageNum, Integer pageSize) {
+        //店铺限制只能取前10页，每页10条，故 pageNum*pageSize必须 小于等于 100
+        if (pageNum * pageSize > 100){
+            pageNum = 10;
+            pageSize = 10;
+        }
         int offset = (pageNum-1)*pageSize;
         ShopDetailExample shopDetailExample = new ShopDetailExample();
         shopDetailExample.setOffset(offset);
@@ -147,6 +156,11 @@ public class ShopServiceImpl implements ShopService {
      */
     @Override
     public PageInfo getRecommentShopBriefListByRegion(String regionPath, Integer commentCount, Integer pageNum, Integer pageSize) {
+        //店铺限制只能取前10页，每页10条，故 pageNum*pageSize必须 小于等于 100
+        if (pageNum * pageSize > 100){
+            pageNum = 10;
+            pageSize = 10;
+        }
         PageHelper.startPage(pageNum , pageSize);
         List<ShopBrief> shopBriefList = shopDetailMapper.getRecommentShopBriefListByRegion(regionPath, commentCount, pageNum, pageSize);
         //得到分页的结果对象
