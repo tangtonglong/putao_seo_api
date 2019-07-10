@@ -42,7 +42,7 @@ public class ShopController {
     StringRedisTemplate appRedis;
 
     /**
-     *
+     * master
      * @param shopId
      * @param pageNum
      * @param pageSize
